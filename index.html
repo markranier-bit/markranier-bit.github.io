@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Replace with your own name and description (shows in browser tab and Google results) -->
+  <title>Mark Ranier Sapiera | IT Student &amp; Aspiring Web Developer</title>
+  <meta name="description" content="Portfolio of Mark Ranier Sapiera, an IT student and aspiring web developer. Projects, skills, and contact information.">
+  <meta name="theme-color" content="#0F0E0E">
+
+  <!--
+    Tiny script that runs BEFORE the page paints.
+    It applies the saved dark/light theme so the page doesn't flash the wrong colors,
+    and adds a "js" class so the scroll-reveal animations only run when JavaScript works.
+    (The full theme logic lives in script.js.)
+  -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+      } catch (e) { /* localStorage can be blocked; the default (dark) theme is used */ }
+    })();
+  </script>
+
+  <!-- Font Awesome: the icon library used for social, skill and interface icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Your styles (colors are at the very top of style.css) -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="wall.css">
+</head>
+
+<body>
+  <!-- Lets keyboard users jump past the navigation -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =========================================================
+       NAVIGATION BAR (sticky, becomes a hamburger menu on mobile)
+       ========================================================= -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+
+      <!-- Replace with your name -->
+      <a class="brand" href="#home">Mark Ranier Sapiera</a>
+
+      <ul class="nav-links" id="nav-menu">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#work">Work</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Dark / Light mode toggle (the choice is saved in localStorage) -->
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to light mode">
+          <i class="fa-solid fa-sun icon-sun" aria-hidden="true"></i>
+          <i class="fa-solid fa-moon icon-moon" aria-hidden="true"></i>
+        </button>
+
+        <!-- Hamburger button (only visible on small screens) -->
+        <button class="icon-btn nav-toggle" id="nav-toggle" type="button"
+                aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- =========================================================
+         HOME / HERO
+         ========================================================= -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+          <!-- Replace with your name -->
+          <h1 class="hero-title hero-item" id="hero-title" style="--i:0">
+            <span>Mark Ranier</span>
+            <span>Sapiera</span>
+          </h1>
+
+          <!-- Replace with your title -->
+          <p class="hero-role hero-item" style="--i:1">IT Student | Aspiring Web Developer</p>
+
+          <!-- Replace with your own short introduction -->
+          <p class="hero-intro hero-item" style="--i:2">
+            I'm an IT student who enjoys web development and building useful digital solutions.
+            I like turning ideas into clean, working websites and systems.
+          </p>
+
+          <div class="hero-actions hero-item" style="--i:3">
+            <a class="btn btn-primary" href="#work">View My Work</a>
+            <a class="btn btn-glass" href="#contact">Contact Me</a>
+          </div>
+
+          <!--
+            Social links: the URLs are NOT written here.
+            Edit them once in script.js (the "socialLinks" list at the top)
+            and every social icon on the page updates automatically.
+          -->
+          <ul class="social-row hero-item" style="--i:4" aria-label="Social media">
+            <li>
+              <a class="social-pill" data-social="facebook" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
+                <span>Facebook</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-pill" data-social="tiktok" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+                <span>TikTok</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-pill" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                <span>Instagram</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="hero-photo hero-item" style="--i:2">
+          <!-- Replace this with your profile image: put your photo at images/profile.jpg
+               (a square photo works best) and update the alt text -->
+          <img src="images/profile.jpg" alt="Portrait of Mark Ranier Sapiera" width="900" height="900">
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         WORK / PROJECTS
+         To add a project: copy one whole <article class="project-card"> block
+         and paste it below the last one, then edit the text and image.
+         ========================================================= -->
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="container">
+
+        <header class="section-head reveal">
+          <h2 id="work-title">My Work</h2>
+          <p>Here are some of the projects I have created through school, personal learning, and development experience.</p>
+        </header>
+
+        <div class="project-grid">
+
+          <!-- PROJECT 1 (the wide "featured" card: remove the project-card--featured class to make it a normal card) -->
+          <article class="project-card project-card--featured reveal">
+            <div class="project-media">
+              <!-- Replace with your project screenshot: images/project1.png -->
+              <img src="images/project1.png" alt="Screenshot of the Faculty Scheduling System" width="1200" height="750" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3>Faculty Scheduling System</h3>
+              <p>A web-based intelligent faculty scheduling system designed to help organize faculty schedules, subjects, rooms, and class allocations.</p>
+              <!-- Technologies used: add or remove <li> items -->
+              <ul class="tech-list" aria-label="Technologies used">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Laravel</li>
+                <li>MySQL</li>
+              </ul>
+              <div class="project-actions">
+                <!-- Replace YOUR_PROJECT_LINK with the live project URL -->
+                <a class="btn btn-primary btn-sm" href="YOUR_PROJECT_LINK" target="_blank" rel="noopener noreferrer">View Project</a>
+                <!-- Replace YOUR_GITHUB_LINK with the GitHub repository URL (delete this line if you don't need it) -->
+                <a class="btn btn-outline btn-sm" href="YOUR_GITHUB_LINK" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2 -->
+          <article class="project-card reveal" style="--i:1">
+            <div class="project-media">
+              <!-- Replace with your project screenshot: images/project2.png -->
+              <img src="images/project2.png" alt="Screenshot of my personal portfolio website" width="1200" height="750" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3>MasterSiomai POS System</h3>
+              <p>A responsive personal portfolio website designed to showcase my skills, projects, background, and contact information.</p>
+              <ul class="tech-list" aria-label="Technologies used">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-primary btn-sm" href="YOUR_PROJECT_LINK" target="_blank" rel="noopener noreferrer">View Project</a>
+                <a class="btn btn-outline btn-sm" href="YOUR_GITHUB_LINK" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 3 (placeholder: edit me later) -->
+          <article class="project-card reveal" style="--i:2">
+            <div class="project-media">
+              <!-- Replace with your project screenshot: images/project3.png -->
+              <img src="images/project3.png" alt="Placeholder image for a future project" width="1200" height="750" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3>Future Project</h3>
+              <p>A new project is coming soon. Replace this text with a short description of what it does and what problem it solves.</p>
+              <ul class="tech-list" aria-label="Technologies used">
+                <li>Technology</li>
+                <li>Technology</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-primary btn-sm" href="YOUR_PROJECT_LINK" target="_blank" rel="noopener noreferrer">View Project</a>
+                <a class="btn btn-outline btn-sm" href="YOUR_GITHUB_LINK" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 4 (placeholder: edit me later) -->
+          <article class="project-card reveal" style="--i:3">
+            <div class="project-media">
+              <!-- Replace with your project screenshot: images/project4.png -->
+              <img src="images/project4.png" alt="Placeholder image for a future project" width="1200" height="750" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3>Future Project</h3>
+              <p>Another project is on the way. Replace this text with a short description when it's ready.</p>
+              <ul class="tech-list" aria-label="Technologies used">
+                <li>Technology</li>
+                <li>Technology</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-primary btn-sm" href="YOUR_PROJECT_LINK" target="_blank" rel="noopener noreferrer">View Project</a>
+                <a class="btn btn-outline btn-sm" href="YOUR_GITHUB_LINK" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SKILLS
+         To add a skill: copy one <li class="skill"> line and change the icon + name.
+         Find icons at https://fontawesome.com/icons (free ones only).
+         ========================================================= -->
+    <section class="section section-alt" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+
+        <header class="section-head reveal">
+          <h2 id="skills-title">My Skills</h2>
+          <p>Tools and technologies I have used in school and personal projects.</p>
+        </header>
+
+        <ul class="skill-grid">
+          <li class="skill reveal"><span class="dot"><i class="fa-brands fa-html5" aria-hidden="true"></i></span><span>HTML</span></li>
+          <li class="skill reveal" style="--i:1"><span class="dot"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span><span>CSS</span></li>
+          <li class="skill reveal" style="--i:2"><span class="dot"><i class="fa-brands fa-js" aria-hidden="true"></i></span><span>JavaScript</span></li>
+          <li class="skill reveal" style="--i:3"><span class="dot"><i class="fa-brands fa-php" aria-hidden="true"></i></span><span>PHP</span></li>
+          <li class="skill reveal" style="--i:4"><span class="dot"><i class="fa-brands fa-laravel" aria-hidden="true"></i></span><span>Laravel</span></li>
+          <li class="skill reveal" style="--i:5"><span class="dot"><i class="fa-solid fa-database" aria-hidden="true"></i></span><span>MySQL</span></li>
+          <li class="skill reveal" style="--i:6"><span class="dot"><i class="fa-brands fa-react" aria-hidden="true"></i></span><span>React</span></li>
+          <li class="skill reveal" style="--i:7"><span class="dot"><i class="fa-brands fa-github" aria-hidden="true"></i></span><span>Git / GitHub</span></li>
+          <li class="skill reveal" style="--i:8"><span class="dot"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><span>Basic Networking</span></li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         ABOUT
+         ========================================================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+
+        <figure class="about-photo reveal">
+          <!-- Replace with another photo of you, or reuse images/profile.jpg -->
+          <img src="images/profile.jpg" alt="Mark Ranier Sapiera smiling at the camera" width="900" height="900" loading="lazy">
+        </figure>
+
+        <div class="about-copy">
+          <header class="section-head reveal">
+            <h2 id="about-title">About Me</h2>
+          </header>
+
+          <!-- Replace with your own story -->
+          <div class="about-text reveal">
+            <p>
+              I'm an Information Technology student who enjoys building things for the web.
+              Most of what I know comes from school projects and practicing on my own: front-end pages,
+              PHP and Laravel back ends, MySQL databases, and the networking basics behind it all.
+            </p>
+            <p>
+              I like turning a rough idea into something people can actually use, and I'm learning something new with every project.
+            </p>
+          </div>
+
+          <!-- EDUCATION: edit the degree and school -->
+          <div class="about-block reveal">
+            <h3>Education</h3>
+            <div class="edu-card">
+              <span class="dot"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+              <div>
+                <p class="edu-degree">Bachelor of Science in Information Technology</p>
+                <p class="edu-school">Universidad de Manila</p>
+                <p class="edu-note">Currently enrolled</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- INTERESTS: add or remove <li> items -->
+          <div class="about-block reveal">
+            <h3>Interests</h3>
+            <ul class="chip-list">
+              <li class="chip"><i class="fa-solid fa-code" aria-hidden="true"></i> Web Development</li>
+              <li class="chip"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Software Development</li>
+              <li class="chip"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i> UI/UX Design</li>
+              <li class="chip"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> Networking</li>
+              <li class="chip"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Technology</li>
+            </ul>
+          </div>
+
+          <!-- CAREER GOAL -->
+          <div class="about-block reveal">
+            <h3>Career Goal</h3>
+            <p>
+              I want to keep building practical IT skills and grow into a software or web development role,
+              working on tools that make everyday tasks easier for other people.
+            </p>
+          </div>
+
+          <!-- RESUME: put your resume file in the same folder as index.html and name it resume.pdf -->
+          <div class="about-cta reveal">
+            <a class="btn btn-primary" href="resume.pdf" download>
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         CONTACT (+ Anonymous message)
+         ========================================================= -->
+    <section class="section section-alt" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+
+        <header class="section-head reveal">
+          <h2 id="contact-title">Contact</h2>
+          <p>Have a question, an idea, or a project in mind? Send me a message or find me on social media.</p>
+        </header>
+
+        <div class="contact-grid">
+
+          <!-- Contact links. The email and social URLs are set in script.js -->
+          <ul class="contact-list reveal">
+            <li>
+              <a class="contact-link" data-email href="#">
+                <span class="dot"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+                <span class="contact-text">
+                  <span class="contact-title">Email</span>
+                  <span class="contact-sub" data-email-text>your.email@example.com</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-link" data-social="facebook" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
+                <span class="contact-text">
+                  <span class="contact-title">Facebook</span>
+                  <span class="contact-sub">Find me on Facebook</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-link" data-social="tiktok" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+                <span class="contact-text">
+                  <span class="contact-title">TikTok</span>
+                  <span class="contact-sub">Find me on TikTok</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-link" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer">
+                <span class="dot"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                <span class="contact-text">
+                  <span class="contact-title">Instagram</span>
+                  <span class="contact-sub">Find me on Instagram</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <!--
+            CONTACT FORM
+            NOTE: A page made only with HTML/CSS/JavaScript cannot send email or store messages by itself.
+            To make this form work for real, connect it to a backend or a form service
+            (Formspree, EmailJS, Netlify Forms, or your own PHP/Laravel API).
+            See "formEndpoints" and "sendToBackend()" in script.js.
+          -->
+          <form class="form-card reveal" id="contact-form" novalidate aria-labelledby="contact-form-title" style="--i:1">
+            <h3 id="contact-form-title">Send me a message</h3>
+
+            <div class="field">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" autocomplete="name" aria-describedby="contact-name-error">
+              <p class="field-error" id="contact-name-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="email" autocomplete="email" aria-describedby="contact-email-error">
+              <p class="field-error" id="contact-email-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5" aria-describedby="contact-message-error"></textarea>
+              <p class="field-error" id="contact-message-error"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!--
+          ANONYMOUS MESSAGE
+          Visitors write a message with no name, email, or account.
+          NOTE: like the contact form, this needs a backend or form service to actually store or deliver
+          the message. Until you connect one (see script.js), it only shows the confirmation animation.
+        -->
+        <div class="anon-panel reveal" id="anonymous">
+          <div class="anon-copy">
+            <h3 id="anon-title">Leave Me an Anonymous Message</h3>
+            <p>Write anything you'd like to tell me. You don't need a name, an email, or an account.</p>
+          </div>
+
+          <div class="anon-card">
+            <form id="anon-form" novalidate aria-labelledby="anon-title">
+              <label for="anon-message">Anonymous message</label>
+              <textarea id="anon-message" name="message" rows="6" maxlength="500"
+                        placeholder="Write your message here..." aria-describedby="anon-error anon-count"></textarea>
+              <div class="anon-meta">
+                <p class="field-error" id="anon-error"></p>
+                <p class="char-count" id="anon-count">0 / 500</p>
+              </div>
+              <button type="submit" class="btn btn-light">Send message</button>
+            </form>
+
+            <!-- Shown after the message is sent -->
+            <div class="anon-success" id="anon-success" hidden tabindex="-1" role="status">
+              <svg class="check" viewBox="0 0 52 52" aria-hidden="true">
+                <circle class="check-circle" cx="26" cy="26" r="24" fill="none"/>
+                <path class="check-mark" fill="none" d="M14 27 l8 8 l16 -17"/>
+              </svg>
+              <p>Your anonymous message has been sent. Thank you for your message!</p>
+              <button type="button" class="btn btn-glass btn-sm" id="anon-reset">Send another message</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-name">Mark Ranier Sapiera</p>
+        <p class="footer-tagline">IT Student | Aspiring Web Developer</p>
+      </div>
+
+      <ul class="footer-social" aria-label="Social media">
+        <li><a class="social-icon" data-social="facebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+        <li><a class="social-icon" data-social="tiktok" href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a></li>
+        <li><a class="social-icon" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div class="container">
+      <p class="copyright">&copy; 2026 Mark Ranier Sapiera. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Small message that appears when you click a link that still has a placeholder URL -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script src="wall.js"></script>
+</body>
+</html>

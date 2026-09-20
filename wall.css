@@ -1,0 +1,39 @@
+/* =====================================================================
+   MESSAGE WALL STYLES
+   Uses the same colors and sizes as style.css, so it follows your theme
+   (dark/light) automatically.
+   ===================================================================== */
+
+.wall { margin-top: clamp(48px, 7vw, 80px); }
+
+.wall h3 {
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.1;
+  letter-spacing: -.035em;
+}
+
+.wall-note,
+.wall-status { margin-top: 10px; color: var(--text-muted); }
+.wall-status[hidden] { display: none; }
+
+/* Messages flow in columns: 3 on desktop, fewer on smaller screens */
+.wall-list { columns: 3 280px; column-gap: 16px; margin-top: 28px; }
+.wall-list:empty { display: none; }
+
+.wall-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition: border-color .3s var(--ease);
+}
+.wall-item:hover { border-color: rgba(254, 46, 75, .6); }
+
+.wall-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.wall-date { display: block; margin-top: 14px; font-size: .875rem; color: var(--text-muted); }
+
+/* Extra line on the "message sent" screen */
+.wall-pending { font-size: .9688rem; font-weight: var(--fw-regular); color: rgba(255, 255, 255, .8); }
