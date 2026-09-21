@@ -1,17 +1,16 @@
 /* =====================================================================
    MESSAGE WALL
    Saves anonymous messages to a Firebase database (Firestore) and shows
-   the APPROVED ones to every visitor.
+   them to every visitor.
 
    HOW IT WORKS
-   1. A visitor sends an anonymous message. It is saved with approved = false,
-      so nobody can see it yet.
-   2. You open the Firebase console, find the message, and change
-      approved from false to true.
-   3. The message now appears on the wall for everyone.
+   1. A visitor sends an anonymous message. It is saved with approved = true,
+      so it shows up on the wall right away.
+   2. To hide a message later, open the Firebase console, find the message,
+      and change approved from true to false (or delete it).
 
-   TO TURN IT ON: paste your Firebase settings into "firebaseConfig" below.
-   Until you do, this file does nothing and the site works as before.
+   The Firestore rules in the Firebase console must ALSO say approved == true
+   in the "allow create" rule, or Firebase will reject new messages.
    ===================================================================== */
 
 (function () {
@@ -23,14 +22,15 @@
      (These values are meant to be public. What protects your data is the
      Firestore rules you set up in the console, not hiding this config.)
      --------------------------------------------------------------- */
-const firebaseConfig = {
-  apiKey: "AIzaSyD2Lin43RQ0M8avetu-iDn7diW15MBC94k",
-  authDomain: "portfolio-messages-b140f.firebaseapp.com",
-  projectId: "portfolio-messages-b140f",
-  storageBucket: "portfolio-messages-b140f.firebasestorage.app",
-  messagingSenderId: "523418918381",
-  appId: "1:523418918381:web:7ef5a27a184f2d31f25be4"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyD2Lin43RQ0M8avetu-iDn7diW15MBC94k",
+    authDomain: "portfolio-messages-b140f.firebaseapp.com",
+    projectId: "portfolio-messages-b140f",
+    storageBucket: "portfolio-messages-b140f.firebasestorage.app",
+    messagingSenderId: "523418918381",
+    appId: "1:523418918381:web:7ef5a27a184f2d31f25be4"
+  };
+
   /* ---------------------------------------------------------------
      2. OTHER SETTINGS
      --------------------------------------------------------------- */
@@ -59,7 +59,7 @@ const firebaseConfig = {
   wall.setAttribute('aria-labelledby', 'wall-title');
   wall.innerHTML =
     '<h3 id="wall-title">Messages from visitors</h3>' +
-    '<p class="wall-note">New messages show up here after I approve them.</p>' +
+    '<p class="wall-note">Leave a message and it shows up here right away.</p>' +
     '<p class="wall-status" id="wall-status" role="status">Loading messages...</p>' +
     '<ul class="wall-list" id="wall-list"></ul>';
   anchor.insertAdjacentElement('afterend', wall);
@@ -72,7 +72,7 @@ const firebaseConfig = {
   if (sentText) {
     const note = document.createElement('p');
     note.className = 'wall-pending';
-    note.textContent = 'It will appear on the wall after I approve it.';
+    note.textContent = 'It now appears on the wall below.';
     sentText.insertAdjacentElement('afterend', note);
   }
 
@@ -108,7 +108,7 @@ const firebaseConfig = {
     });
 
   /* ---------------------------------------------------------------
-     5. SAVE A NEW MESSAGE (saved as "not approved" so nobody sees it yet)
+     5. SAVE A NEW MESSAGE (saved as approved, so it shows on the wall right away)
      --------------------------------------------------------------- */
   function saveMessage(text) {
     let last = 0;
@@ -119,10 +119,16 @@ const firebaseConfig = {
 
     return db.collection(COLLECTION).add({
       text: String(text).slice(0, MAX_LENGTH),
-      approved: false,
+      approved: true,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(function () {
       try { localStorage.setItem('anon-last-sent', String(Date.now())); } catch (e) { /* storage blocked */ }
+      loadMessages().catch(function () {});   // show the new message on the wall right away
+    }).catch(function (error) {
+      console.error('[Message wall] Could not save the message:', error);
+      // TEMPORARY DEBUG: shows the real reason on screen. Delete this line once everything works.
+      alert('Debug: ' + error.message);
+      throw error;
     });
   }
 
